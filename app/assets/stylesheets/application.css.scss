@@ -15,27 +15,32 @@
 @import "bootstrap";
 
 
+.nav {
+  overflow: hidden;
+}
 
 
-
-div .jumbotron {
+.jumbotron {
 
   background: no-repeat center bottom fixed url("eric-ward.jpg");
   position: relative;
   background-size: cover;
-  padding-left: 5px;
   color: white;
+
   }
 
-
-div .Register {
+.Register {
 
   padding-left: 5px;
   }
 
-div .login {
+.login {
 
   padding-left: 5px;
+  }
+
+  .strike {
+    text-decoration: line-through;
   }
 
 
