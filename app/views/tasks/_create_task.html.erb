@@ -1,12 +1,15 @@
 <%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
+      <h2>
+        <%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:
+      </h2>
       <ul>
-      <% task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% task.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -18,4 +21,5 @@
 
     <%= form.submit "Add new task", class: "btn btn-primary my-2 my-sm-0" %>
   </div>
+
 <% end %>

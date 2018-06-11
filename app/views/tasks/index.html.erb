@@ -1,86 +1,87 @@
 
   <% if current_user %>
 
-  <div class="container">
+    <div class="container">
 
-     <% if alert %>
+      <% if alert %>
 
-     <br>
-     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <%= alert %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+       <br>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+      <% end %>
+
+      <br>
+
+       <%= render 'create_task' %>
+
+       <br>
+
+      <table class="table">
+
+        <tbody>
+          <% @tasks.each do |task| %>
+            <% if task.completed %>
+            <tr class="table-active">
+              <td class="strike"><%=task.description %>
+              </td>
+              <td>
+                <%= form_for(task) do |f| %>
+                  <%= f.text_field :description, type: "hidden" %>
+                  <%= f.check_box :completed, checked: false, style: "visibility:hidden" %>
+                  <%= f.submit "Restore", class: "btn btn-outline-secondary btn-sm" %>
+                <% end %>
+              </td>
+              <td>
+                <% link_to 'Show', task %>
+                <center>
+                  <%= link_to 'Remove', task, method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: 'Are you sure?' } %>
+                </center>
+              </td>
+            </tr>
+
+            <% else %>
+
+            <tr>
+              <td><%=task.description %></td>
+               <td>
+                <%= form_for(task) do |f| %>
+                  <%= f.text_field :description, type: "hidden" %>
+                  <%= f.check_box :completed, checked: true, style: "visibility:hidden" %>
+                  <%= f.submit "Completed", class: "btn btn-outline-success btn-sm" %>
+                <% end %>
+              </td>
+              <td>
+                <% link_to 'Show', task %>
+                <center>
+                  <%= link_to 'Remove', task, method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: 'Are you sure?' } %>
+                </center>
+              </td>
+            </tr>
+
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+       <%= link_to "Dispaly active tasks", tasks_search_path("false") %>
+
+      <br>
+
+       <%= link_to "Display completed tasks", tasks_search_path("true") %>
+
+      <br>
+
+       <%= link_to "Display all tasks", tasks_path %>
+
     </div>
-
-    <% end %>
-
-    <br>
-
-     <%= render 'create_task' %>
-
-     <br>
-
-    <table class="table">
-
-      <tbody>
-        <% @tasks.each do |task| %>
-          <% if task.completed %>
-          <tr class="table-active">
-            <td class="strike"><%=task.description %>
-            </td>
-            <td>
-              <%= form_for(task) do |f| %>
-                <%= f.text_field :description, type: "hidden" %>
-                <%= f.check_box :completed, checked: false, style: "visibility:hidden" %>
-                <%= f.submit "Restore", class: "btn btn-outline-secondary btn-sm" %>
-              <% end %>
-            </td>
-            <td>
-                <% link_to 'Show', task %>
-                <center>
-                  <%= link_to 'Remove', task, method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: 'Are you sure?' } %>
-                </center>
-            </td>
-          </tr>
-
-          <% else %>
-
-          <tr>
-            <td><%=task.description %></td>
-             <td>
-              <%= form_for(task) do |f| %>
-                <%= f.text_field :description, type: "hidden" %>
-                <%= f.check_box :completed, checked: true, style: "visibility:hidden" %>
-                <%= f.submit "Completed", class: "btn btn-outline-success btn-sm" %>
-              <% end %>
-            </td>
-            <td>
-                <% link_to 'Show', task %>
-                <center>
-                  <%= link_to 'Remove', task, method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: 'Are you sure?' } %>
-                </center>
-            </td>
-          </tr>
-
-        <% end %>
-       <% end %>
-      </tbody>
-    </table>
-
-    <br>
-
-     <%= link_to "Dispaly active tasks", tasks_search_path("false") %>
-
-    <br>
-
-     <%= link_to "Display completed tasks", tasks_search_path("true") %>
-
-    <br>
-
-     <%= link_to "Display all tasks", tasks_path %>
-
-  </div>
 
 <% else %>
 
