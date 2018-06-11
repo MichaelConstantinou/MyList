@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
+    @task = Task.new
     @tasks = Task.all
   end
 
@@ -17,10 +18,6 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
-  def edit
-  end
-
   # POST /tasks
   # POST /tasks.json
   def create
@@ -29,7 +26,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to tasks_url, alert: 'Task was created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -43,7 +40,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to tasks_url, alert: 'Task was updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -57,7 +54,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url, alert: 'Task was removed.' }
       format.json { head :no_content }
     end
   end
