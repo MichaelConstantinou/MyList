@@ -15,7 +15,9 @@
 
   <br>
 
-  <h2><%= current_user.name.split.first %>'s To-Do List</h2>
+   <%= render 'create_task' %>
+
+   <br>
 
   <table class="table">
 
@@ -48,10 +50,6 @@
      <% end %>
     </tbody>
   </table>
-
-  <br>
-
-  <%= link_to 'Add new task', new_task_path, class: 'btn btn-primary' %>
 
 <% else %>
 

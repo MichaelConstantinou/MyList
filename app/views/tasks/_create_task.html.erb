@@ -1,0 +1,21 @@
+<%= form_with(model: @task, local: true) do |form| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inline my-2 my-lg-0">
+    <h2><%= current_user.name.split.first %>'s To-Do List<span></span></h2>
+
+    <%= form.text_field :description, id: :task_description, class: "form-control mr-sm-2" %>
+
+    <%= form.submit "Add new task", class: "btn btn-primary my-2 my-sm-0" %>
+  </div>
+<% end %>
