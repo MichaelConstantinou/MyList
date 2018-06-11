@@ -6,6 +6,18 @@ class TasksController < ApplicationController
   def index
     @task = Task.new
     @tasks = Task.all
+
+    case params[:status]
+      when "true"
+        @tasks = @tasks.where(completed: true)
+      when "false"
+        @tasks = @tasks.where(completed: false)
+    end
+
+  end
+
+  def toggle
+    @tasks = Task.all.where(completed: false)
   end
 
   # GET /tasks/1
@@ -57,6 +69,10 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_url, alert: 'Task was removed.' }
       format.json { head :no_content }
     end
+  end
+
+  def toggle
+
   end
 
   private

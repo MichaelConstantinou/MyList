@@ -67,6 +67,19 @@
        <% end %>
       </tbody>
     </table>
+
+    <br>
+
+     <%= link_to "Dispaly active tasks", tasks_search_path("false") %>
+
+    <br>
+
+     <%= link_to "Display completed tasks", tasks_search_path("true") %>
+
+    <br>
+
+     <%= link_to "Display all tasks", tasks_path %>
+
   </div>
 
 <% else %>
