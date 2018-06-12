@@ -141,6 +141,7 @@ RSpec.describe TasksController, type: :controller do
   before do
     @new_user = User.create!(email: 'newuser@user.com', name: 'Jo Doe', password: 'password2018')
     sign_in(@new_user)
+    Task.create!(user_id: 1, description: 'Make bed', completed: true)
   end
 
   describe '#index' do
@@ -156,17 +157,17 @@ RSpec.describe TasksController, type: :controller do
 
     it 'should create a new task' do
       post :create, params: {task: {description: 'Do some cucumber'}}
-      expect(@new_user.task.last.description).to eq 'Do some cucumber'
+      expect(@new_user.tasks.last.description).to eq 'Do some cucumber'
     end
   end
 
-  # describe '#destroy' do
+  describe '#destroy' do
 
-  #   it 'should delete the chosen streak' do
-  #      delete :destroy, params: {id: 1}
-  #      expect(Streak.count).to eq 0
-  #   end
-  # end
+    it 'should delete the chosen task' do
+       delete :destroy, params: {id: 1}
+       expect(Task.count).to eq 0
+    end
+  end
 
 
 
