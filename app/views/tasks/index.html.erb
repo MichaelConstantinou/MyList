@@ -25,7 +25,7 @@
       <table class="table">
 
         <tbody>
-          <% @tasks.where(user_id: current_user.id).each do |task| %>
+          <% @tasks.each do |task| %>
             <% if task.completed %>
             <tr class="table-active">
               <td class="strike"><%=task.description %>

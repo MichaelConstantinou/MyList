@@ -138,4 +138,36 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
+  before do
+    @new_user = User.create!(email: 'newuser@user.com', name: 'Jo Doe', password: 'password2018')
+    sign_in(@new_user)
+  end
+
+  describe '#index' do
+
+    it 'should route new user to welcome page on registration' do
+      get :index
+      expect(response).to render_template('tasks/index')
+    end
+
+  end
+
+  describe '#create' do
+
+    it 'should create a new task' do
+      post :create, params: {task: {description: 'Do some cucumber'}}
+      expect(@new_user.task.last.description).to eq 'Do some cucumber'
+    end
+  end
+
+  # describe '#destroy' do
+
+  #   it 'should delete the chosen streak' do
+  #      delete :destroy, params: {id: 1}
+  #      expect(Streak.count).to eq 0
+  #   end
+  # end
+
+
+
 end

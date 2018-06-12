@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @task = Task.new
-    @tasks = Task.all
+    @tasks = current_user.tasks
 
     case params[:status]
       when "true"
