@@ -2,14 +2,17 @@ class TasksController < ApplicationController
   before_action :set_task, only: [ :edit, :update, :destroy]
 
   def index
-    @task = Task.new
-    @tasks = current_user.tasks
+    if current_user
 
-    case params[:status]
-      when "true"
-        @tasks = @tasks.where(completed: true)
-      when "false"
-        @tasks = @tasks.where(completed: false)
+      @task = Task.new
+      @tasks = current_user.tasks
+
+      case params[:status]
+        when "true"
+          @tasks = @tasks.where(completed: true)
+        when "false"
+          @tasks = @tasks.where(completed: false)
+      end
     end
   end
 
